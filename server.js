@@ -5,21 +5,19 @@
 // Dependencies
 // =============================================================
 const express = require("express");
-
+const exphbs = require("express-handlebars");
+const db = require("./models");
+const carsController = require("./controllers/carsController");
 // Sets up the Express App
 // =============================================================
 const app = express();
 const PORT = process.env.PORT || 8080;
-
-const db = require("./models");
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Set Handlebars.
-const exphbs = require("express-handlebars");
-
 app.engine("handlebars", exphbs.engine({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
@@ -46,6 +44,7 @@ app.get("/apiFun", (req, res) => {
 // app.use(express.static("app/public"));
 
 // // Routes
+app.use(carsController);
 // // =============================================================
 // require("./app/routes/api-routes.js")(app);
 
