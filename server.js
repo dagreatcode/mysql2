@@ -60,7 +60,7 @@ app.use(carsController);
 
 // Starts the server to begin listening
 // =============================================================
-// db.sequelize.sync({force:true}).then(function () { // TODO: Drops Database to mirgate added changes
+// db.sequelize.sync({force:true}).then(function () { // TODO: Drops Database to mirgate added changes from the model
 db.sequelize.sync().then(function () {
   app.listen(PORT, function () {
     console.log(`App listening on 🌎 PORT http://localhost:${PORT}`);

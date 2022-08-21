@@ -8,14 +8,32 @@ router.get("/car", (req, res) => {
     res.render("all-cars", { allCars: allCars });
   });
 });
-router.get("/car/:id", (req, res) => {
-  res.render("one-car");
-});
-router.get("/car/:id/edit", (req, res) => {
-  res.render("edit-car");
-});
 router.get("/car/new", (req, res) => {
   res.render("new-car");
+});
+router.get("/car/:id", (req, res) => {
+  db.Cars.findOne({
+    where: {
+      id: req.params.findOne,
+    },
+  }).then((foundCar) => {
+    res.render("one-car", {
+      name: foundCar.name,
+      price: foundCar.price,
+    });
+  });
+});
+router.get("/car/:id/edit", (req, res) => {
+  db.Cars.findOne({
+    where: {
+      id: req.params.findOne,
+    },
+  }).then((foundCar) => {
+    res.render("edit-car", {
+      name: foundCar.name,
+      price: foundCar.price,
+    });
+  });
 });
 
 // API's
