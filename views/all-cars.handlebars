@@ -1,12 +1,25 @@
 <h1>All Cars</h1>
-
+<div>
+    <a href="/car/new"><button>Create new thing</button></a>
+</div>
 {{#each allCars}}
 <div>
   {{name}}
-  -
-  {{price}}
   <a href="/car/{{id}}"><button>View</button></a>
   <a href="/car/{{id}}/edit"><button>Edit</button></a>
-  <button>Delete</button>
+  <button class="delete" data-id="{{id}}">Delete</button>
 </div>
 {{/each}}
+
+<script>
+  $(".delete").on("click", function() {
+    const idToDelete = $(this).data("id")
+
+    $.ajax({
+      url: `/api/car/${idToDelete}`,
+      method: "DELETE"
+    }).then(function () {
+      location.reload()
+    })
+  })
+</script>

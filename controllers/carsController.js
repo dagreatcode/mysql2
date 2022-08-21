@@ -68,4 +68,13 @@ router.put("/api/car/:id", (req, res) => {
     res.end();
   });
 });
+router.delete("/api/thing/:id", (req, res) => {
+  db.Cars.destroy({
+    where: {
+      id: req.params.id,
+    },
+  }).then(result => {
+    res.end()
+  })
+});
 module.exports = router;
