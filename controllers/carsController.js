@@ -3,24 +3,24 @@ const db = require("../models");
 const router = express.Router();
 
 // Views
-router.get("/cars", (req, res) => {
+router.get("/car", (req, res) => {
   db.Cars.findAll().then((allCars) => {
     res.render("all-cars", { allCars: allCars });
   });
 });
-router.get("/cars/:id", (req, res) => {
+router.get("/car/:id", (req, res) => {
   res.render("one-car");
 });
-router.get("/cars/:id/edit", (req, res) => {
+router.get("/car/:id/edit", (req, res) => {
   res.render("edit-car");
 });
-router.get("/cars/new", (req, res) => {
+router.get("/car/new", (req, res) => {
   res.render("new-car");
 });
 
 // API's
 
-router.post("/api/cars", (req, res) => {
+router.post("/api/car", (req, res) => {
   db.Cars.create(req.body)
     .then((newCar) => {
       res.json({

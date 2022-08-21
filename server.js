@@ -6,6 +6,10 @@
 // =============================================================
 const express = require("express");
 const exphbs = require("express-handlebars");
+const handlebars = require("handlebars");
+const {
+  allowInsecurePrototypeAccess,
+} = require("@handlebars/allow-prototype-access");
 const db = require("./models");
 const carsController = require("./controllers/carsController");
 // Sets up the Express App
@@ -18,7 +22,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Set Handlebars.
-app.engine("handlebars", exphbs.engine({ defaultLayout: "main" }));
+app.engine(
+  "handlebars",
+  exphbs.engine({
+    defaultLayout: "main",
+    handlebars: allowInsecurePrototypeAccess(handlebars),
+  })
+);
 app.set("view engine", "handlebars");
 
 // VIEW ROUTES
@@ -50,6 +60,7 @@ app.use(carsController);
 
 // Starts the server to begin listening
 // =============================================================
+// db.sequelize.sync({force:true}).then(function () { // TODO: Drops Database to mirgate added changes
 db.sequelize.sync().then(function () {
   app.listen(PORT, function () {
     console.log(`App listening on 🌎 PORT http://localhost:${PORT}`);
