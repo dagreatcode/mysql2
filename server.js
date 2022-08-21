@@ -4,26 +4,28 @@
 
 // Dependencies
 // =============================================================
-var express = require("express");
+const express = require("express");
 
 // Sets up the Express App
 // =============================================================
-var app = express();
-var PORT = process.env.PORT || 8080;
+const app = express();
+const PORT = process.env.PORT || 8080;
+
+const db = require("./models");
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Set Handlebars.
-var exphbs = require("express-handlebars");
+const exphbs = require("express-handlebars");
 
 app.engine("handlebars", exphbs.engine({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // VIEW ROUTES
 app.get("/", (req, res) => {
-  res.render("index", {name: "Vincent Kendrick"});
+  res.render("index", { name: "Vincent Kendrick" });
 });
 
 // Test API Routes
@@ -35,7 +37,7 @@ app.get("/api/config", (req, res) => {
 
 app.get("/apiFun", (req, res) => {
   res.send("API FUN");
-  var adminUser = req.params.apiFun;
+  const adminUser = req.params.apiFun;
   console.log(adminUser);
   res.end();
 });
@@ -49,6 +51,8 @@ app.get("/apiFun", (req, res) => {
 
 // Starts the server to begin listening
 // =============================================================
-app.listen(PORT, function () {
-  console.log(`App listening on 🌎 PORT http://localhost:${PORT}`);
+db.sequelize.sync().then(function () {
+  app.listen(PORT, function () {
+    console.log(`App listening on 🌎 PORT http://localhost:${PORT}`);
+  });
 });
