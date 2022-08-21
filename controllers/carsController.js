@@ -4,7 +4,7 @@ const router = express.Router();
 
 // Views
 router.get("/car", (req, res) => {
-  db.Cars.findAll().then((allCars) => {
+  db.Car.findAll().then((allCars) => {
     res.render("all-cars", { allCars: allCars });
   });
 });
@@ -12,11 +12,12 @@ router.get("/car/new", (req, res) => {
   res.render("new-car");
 });
 router.get("/car/:id", (req, res) => {
-  db.Cars.findOne({
+  db.Car.findOne({
     where: {
-      id: req.params.findOne,
+      id: req.params.id,
     },
   }).then((foundCar) => {
+    console.log(foundCar);
     res.render("one-car", {
       name: foundCar.name,
       price: foundCar.price,
@@ -25,11 +26,12 @@ router.get("/car/:id", (req, res) => {
   });
 });
 router.get("/car/:id/edit", (req, res) => {
-  db.Cars.findOne({
+  db.Car.findOne({
     where: {
-      id: req.params.findOne,
+      id: req.params.id,
     },
   }).then((foundCar) => {
+    console.log(foundCar);
     res.render("edit-car", {
       name: foundCar.name,
       price: foundCar.price,
@@ -41,7 +43,8 @@ router.get("/car/:id/edit", (req, res) => {
 // API's
 
 router.post("/api/car", (req, res) => {
-  db.Cars.create(req.body)
+  console.log(req.body);
+  db.Car.create(req.body)
     .then((newCar) => {
       res.json({
         error: false,
@@ -59,7 +62,7 @@ router.post("/api/car", (req, res) => {
     });
 });
 router.put("/api/car/:id", (req, res) => {
-  db.Cars.update(req.body, {
+  db.Car.update(req.body, {
     where: {
       id: req.params.id,
     },
@@ -68,13 +71,13 @@ router.put("/api/car/:id", (req, res) => {
     res.end();
   });
 });
-router.delete("/api/thing/:id", (req, res) => {
-  db.Cars.destroy({
+router.delete("/api/car/:id", (req, res) => {
+  db.Car.destroy({
     where: {
       id: req.params.id,
     },
-  }).then(result => {
-    res.end()
-  })
+  }).then((result) => {
+    res.end();
+  });
 });
 module.exports = router;

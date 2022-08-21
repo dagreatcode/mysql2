@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-  const Cars = sequelize.define("Cars", {
+  const Car = sequelize.define("Car", {
     name: {
       type: DataTypes.STRING,
     },
@@ -7,5 +7,5 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.DECIMAL(10,2)
     },
   });
-  return Cars;
+  return Car;
 };

@@ -12,8 +12,19 @@
 </form>
 
 <script>
-  $("#edit-car").on("submit", function(e) { e.preventDefault(); const name =
-  $("name-input").val(); const price = $("price-input").val() $.ajax({ url:
-  `/api/car/${{id}}`, method:"PUT", data: { name: name, price: price, }
-  }).then(function(){ window.location.replace(`/car/${id}`) }) })
+  $("#edit-car").on("submit", function(e) { 
+    e.preventDefault(); 
+    const name = $("name-input").val(); 
+    const price = $("price-input").val();
+    $.ajax({ 
+        url: `/api/car/${{id}}`, 
+        method:"PUT", 
+        data: { 
+            name: name, 
+            price: price, 
+        }
+    }).then(function(){ 
+      window.location.replace(`/car/${id}`) 
+    }) 
+  })
 </script>
