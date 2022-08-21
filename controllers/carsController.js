@@ -1,13 +1,14 @@
 const express = require("express");
-const db = require("../models");
 const router = express.Router();
+const db = require("../models");
 
-// Views
+// VIEWS
 router.get("/car", (req, res) => {
   db.Car.findAll().then((allCars) => {
     res.render("all-cars", { allCars: allCars });
   });
 });
+// Always go before your id route
 router.get("/car/new", (req, res) => {
   res.render("new-car");
 });
