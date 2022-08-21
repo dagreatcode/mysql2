@@ -1,6 +1,6 @@
 <h1>Add New Car</h1>
 
-<form id="new-thing">
+<form id="new-car">
     <input type="text" value="{{name}}" id="name-input">
     <input type="text" value="{{price}}" id="price-input">
     <input type="hidden" value="{{id}}" id="id-input">
@@ -8,21 +8,21 @@
 </form>
 
 <script>
-    $("#new-thing").on("submit", function (event) {
+    $("#new-car").on("submit", function (event) {
         event.preventDefault();
         const name = $("#name-input").val();
         const price = $("#price-input").val();
         const id = $("#id-input").val();
         console.log(id);
         $.ajax({
-            url: `/api/thing`,
+            url: `/api/car`,
             method: "POST",
             data: {
                 name: name,
                 price: price,
             }
         }).then(function () {
-            window.location.replace(`/thing/${id}`);
+            window.location.replace(`/car/${id}`);
         })
     })
 </script>
