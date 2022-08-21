@@ -20,4 +20,23 @@ router.get("/cars/new", (req, res) => {
 
 // API's
 
+router.post("/api/cars", (req, res) => {
+  db.Cars.create(req.body)
+    .then((newCar) => {
+      res.json({
+        error: false,
+        data: newCar,
+        message: "Successfully created new car",
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: true,
+        data: null,
+        message: "Unable to create new car.",
+      });
+    });
+});
+
 module.exports = router;
