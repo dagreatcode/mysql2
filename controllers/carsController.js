@@ -56,5 +56,14 @@ router.post("/api/car", (req, res) => {
       });
     });
 });
-
+router.put("/api/car/:id", (req, res) => {
+  db.Cars.update(req.body, {
+    where: {
+      id: req.params.id,
+    },
+  }).then((updatedObject) => {
+    console.log(updatedObject);
+    res.end();
+  });
+});
 module.exports = router;
