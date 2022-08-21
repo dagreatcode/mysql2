@@ -20,6 +20,7 @@ router.get("/car/:id", (req, res) => {
     res.render("one-car", {
       name: foundCar.name,
       price: foundCar.price,
+      id: foundCar.id,
     });
   });
 });
@@ -32,6 +33,7 @@ router.get("/car/:id/edit", (req, res) => {
     res.render("edit-car", {
       name: foundCar.name,
       price: foundCar.price,
+      id: foundCar.id,
     });
   });
 });

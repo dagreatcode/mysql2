@@ -4,8 +4,16 @@
 -
 {{price}}
 
-<form>
-  <input type="text" value="{{name}}" />
-  <input type="text" value="{{price}}" />
+<form id="edit-car">
+  <input type="text" value="{{name}}" id="name-input" />
+  <input type="text" value="{{price}}" id="price-input" />
+  <input type="hidden" value="{{id}}" id="id-input" />
   <button>Submit Changes</button>
 </form>
+
+<script>
+  $("#edit-car").on("submit", function(e) { e.preventDefault(); const name =
+  $("name-input").val(); const price = $("price-input").val() $.ajax({ url:
+  `/api/car/${{id}}`, method:"PUT", data: { name: name, price: price, }
+  }).then(function(){ window.location.replace(`/car/${id}`) }) })
+</script>
