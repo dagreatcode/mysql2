@@ -4,8 +4,14 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
     },
     price: {
-      type: DataTypes.DECIMAL(10,2)
+      type: DataTypes.DECIMAL(10, 2),
     },
   });
+  Car.associate = function (models) {
+    Car.belongsToMany(models.User, {
+      through: "UserCars",
+      foreignKey: "carId",
+    });
+  };
   return Car;
 };

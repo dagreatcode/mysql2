@@ -1,12 +1,21 @@
 module.exports = function (sequelize, DataTypes) {
-    const Users = sequelize.define("Users", {
-      fullname: {
-        type: DataTypes.STRING,
-      },
-      age: {
-        type: DataTypes.DECIMAL(10,2)
-      },
+  const User = sequelize.define("User", {
+    fullname: {
+      type: DataTypes.STRING,
+    },
+    age: {
+      type: DataTypes.DECIMAL(10, 2),
+    },
+  });
+
+  // User.associate = function (models) {
+  //   User.belongsTo(models.Country);
+  // };
+  User.associate = function (models) {
+    User.belongsToMany(models.Car, {
+      through: "UserCars",
+      foreignKey: "userId",
     });
-    return Users;
   };
-  
+  return User;
+};
