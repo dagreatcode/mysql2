@@ -12,6 +12,8 @@ const {
 } = require("@handlebars/allow-prototype-access");
 const db = require("./models");
 const carsController = require("./controllers/carsController");
+const usersController = require("./controllers/usersController");
+
 // Sets up the Express App
 // =============================================================
 const app = express();
@@ -55,6 +57,8 @@ app.get("/apiFun", (req, res) => {
 
 // // Routes
 app.use(carsController);
+app.use(usersController);
+
 // // =============================================================
 // require("./app/routes/api-routes.js")(app);
 
