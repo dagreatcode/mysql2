@@ -13,6 +13,7 @@ const {
 const db = require("./models");
 const carsController = require("./controllers/carsController");
 const usersController = require("./controllers/usersController");
+var compression = require('compression')
 
 // Sets up the Express App
 // =============================================================
@@ -22,6 +23,19 @@ const PORT = process.env.PORT || 8080;
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Setup filter
+app.use(compression({ filter: shouldCompress }))
+ 
+function shouldCompress (req, res) {
+  if (req.headers['x-no-compression']) {
+    // don't compress responses with this request header
+    return false
+  }
+ 
+  // fallback to standard filter function
+  return compression.filter(req, res)
+}
 
 // Set Handlebars.
 app.engine(
