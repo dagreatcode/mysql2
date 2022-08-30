@@ -22,7 +22,8 @@
         method:"PUT", 
         data: { 
             name: name, 
-            price: price, 
+            price: price,
+            id: id, 
         }
     }).then(function(){ 
       window.location.replace(`/car/${id}`) 
