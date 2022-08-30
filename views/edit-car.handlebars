@@ -16,6 +16,7 @@
     e.preventDefault(); 
     const name = $("name-input").val(); 
     const price = $("price-input").val();
+    const id = $("#id-input").val();
     $.ajax({ 
         url: `/api/car/${{id}}`, 
         method:"PUT", 
